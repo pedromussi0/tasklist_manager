@@ -6,6 +6,10 @@ from .models import Task
 from api.serializers import TaskSerializer
 
 
+def index(request):
+    return render(request, "index.html")
+
+
 class TaskListView(generic.ListView):
     model = Task
 
