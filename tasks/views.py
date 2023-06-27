@@ -1,29 +1,22 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views import generic
+# MODEL
+from tasks.models import Task
+
+# SERIALIZER
+from .serializers import TaskSerializer
+
+# DRF
 from rest_framework import generics
-from .models import Task
-from api.serializers import TaskSerializer
-
-# def index(request):
-#    return render(request, "index.html")
-#
-#
-# class TaskListView(generic.ListView):
-#    model = Task
 
 
-# class TaskCreateView(generic.CreateView):
-#    model = Task
-#    fields = ["title", "description"]
-#    success_url = reverse_lazy("task_list")
+class TaskList(generics.ListCreateAPIView):
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        queryset = Task.objects.all()
+
+        return queryset
 
 
-# class TaskUpdateView(generic.UpdateView):
-#    model = Task
-#    fields = ["title", "description", "is_completed"]
-
-
-# class TaskDeleteView(generic.DeleteView):
-#   model = Task
-#  success_url = "/"
+class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TaskSerializer
+    queryset = Task.objects.all()

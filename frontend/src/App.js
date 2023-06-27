@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     // Fetch tasks from Django API
-    fetch('http://localhost:8000/api/task/')  // Update the URL to match your Django task_list endpoint
+    fetch('http://localhost:8000/api/task/')
       .then(response => response.json())
       .then(data => setTasks(data))
       .catch(error => console.log(error));
@@ -15,7 +15,7 @@ function App() {
 
   const handleTaskCreate = newTask => {
     // Make a POST request to the task_create endpoint to create a new task
-    fetch('http://localhost:8000/api/task/', {  // Update the URL to match your Django task_create endpoint
+    fetch('http://localhost:8000/api/task/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
